@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import ListItems from '../ListItems/ListItems';
 import { getSearchMovies } from '../shared/api/movies';
 
 export default function MoviesSearch() {
@@ -7,11 +8,8 @@ export default function MoviesSearch() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
-  // const [value, setValue] = useState('');
-
-  const location = useLocation();
-
   const [valueParams, setValueParams] = useSearchParams();
+
   const value = valueParams.get('query');
 
   useEffect(() => {
@@ -42,18 +40,6 @@ export default function MoviesSearch() {
     setSearch('');
   };
 
-  const elements = items.map(item => (
-    <li key={item.id}>
-      <Link to={`/movies/${item.id}`} state={{ from: location }}>
-        <img
-          src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-          alt=""
-          width={100}
-        />
-        {item.original_title || item.name}
-      </Link>
-    </li>
-  ));
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -63,7 +49,7 @@ export default function MoviesSearch() {
         </label>
         <button type="submit">search</button>
       </form>
-      <ol>{elements}</ol>
+      <ListItems items={items} />
       {loading && <p>Loading ....</p>}
       {error && <p>Fail ....{error.message}</p>}
     </>

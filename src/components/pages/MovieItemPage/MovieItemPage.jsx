@@ -1,4 +1,4 @@
-import { getMovieItem } from '../shared/api/movies';
+import { getMovieItem } from '../../modules/shared/api/movies';
 import {
   Link,
   useParams,
@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-export default function MovieItem() {
+export default function MovieItemPage() {
   const [item, setItem] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
