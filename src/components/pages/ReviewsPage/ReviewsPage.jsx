@@ -25,13 +25,13 @@ export default function ReviewsPage() {
 
   const elements = items.map(item => (
     <li key={item.id}>
-      <h2>{item.author}</h2>
+      <h2>Author:{item.author}</h2>
       <p>{item.content}</p>
     </li>
   ));
   return (
     <>
-      <ol>{elements}</ol>
+      <ol>{elements || <p>No found review</p>}</ol>
       {loading && <p>Loading ....</p>}
       {error && <p>Fail ....{error.message}</p>}
     </>

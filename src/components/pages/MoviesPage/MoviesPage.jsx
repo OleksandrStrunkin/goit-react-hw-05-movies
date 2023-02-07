@@ -1,11 +1,5 @@
+import MoviesSearch from 'components/modules/MoviesSearch/MoviesSearch';
+
 export default function MoviesPage() {
-  return (
-    <ul>
-      <li>32423</li>
-      <li>32423</li>
-      <li>32423</li>
-      <li>32423</li>
-      <li>32423</li>
-    </ul>
-  );
+  return <MoviesSearch />;
 }

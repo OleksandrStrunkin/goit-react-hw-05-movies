@@ -1,5 +1,11 @@
 import { getMovieItem } from '../shared/api/movies';
-import { Link, useParams, Outlet } from 'react-router-dom';
+import {
+  Link,
+  useParams,
+  Outlet,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 export default function MovieItem() {
@@ -7,6 +13,13 @@ export default function MovieItem() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const params = useParams();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  function goBack() {
+    navigate(-1);
+  }
 
   useEffect(() => {
     const fetchMovieItem = async () => {
@@ -25,6 +38,7 @@ export default function MovieItem() {
 
   return (
     <>
+      <button onClick={goBack}>Go back</button>
       <div>
         <img
           src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
