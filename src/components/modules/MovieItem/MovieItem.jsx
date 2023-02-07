@@ -16,9 +16,10 @@ export default function MovieItem() {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const { from } = location.state;
 
   function goBack() {
-    navigate(-1);
+    navigate(from);
   }
 
   useEffect(() => {
@@ -50,8 +51,12 @@ export default function MovieItem() {
       </div>
       {loading && <p>Loading ....</p>}
       {error && <p>Fail ....{error.message}</p>}
-      <Link to={`/movies/${item.id}/cast`}>Cast</Link>
-      <Link to={`/movies/${item.id}/reviews`}>Reviews</Link>
+      <Link state={{ from }} to={`/movies/${item.id}/cast`}>
+        Cast
+      </Link>
+      <Link state={{ from }} to={`/movies/${item.id}/reviews`}>
+        Reviews
+      </Link>
       <Outlet />
     </>
   );

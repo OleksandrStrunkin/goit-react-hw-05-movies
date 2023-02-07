@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { getSearchMovies } from '../shared/api/movies';
 
 export default function MoviesSearch() {
@@ -7,7 +7,12 @@ export default function MoviesSearch() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
-  const [value, setValue] = useState('');
+  // const [value, setValue] = useState('');
+
+  const location = useLocation();
+
+  const [valueParams, setValueParams] = useSearchParams();
+  const value = valueParams.get('query');
 
   useEffect(() => {
     const fetchSearchMovies = async () => {
@@ -22,7 +27,7 @@ export default function MoviesSearch() {
         setLoading(false);
       }
     };
-    if (value !== '') {
+    if (value) {
       fetchSearchMovies();
     }
   }, [setError, setItems, setLoading, value]);
@@ -33,13 +38,13 @@ export default function MoviesSearch() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setValue(search);
+    setValueParams({ query: search });
     setSearch('');
   };
 
   const elements = items.map(item => (
     <li key={item.id}>
-      <Link to={`/movies/${item.id}`}>
+      <Link to={`/movies/${item.id}`} state={{ from: location }}>
         <img
           src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
           alt=""
