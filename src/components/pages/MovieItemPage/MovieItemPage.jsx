@@ -1,4 +1,5 @@
 import { getMovieItem } from '../../modules/shared/api/movies';
+import { nanoid } from 'nanoid';
 import {
   Link,
   useParams,
@@ -7,6 +8,9 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import styles from './MovieItemPage.module.scss';
+import photo from '../NoFoundPage/notFound.jpg';
+import { Audio } from 'react-loader-spinner';
 
 export default function MovieItemPage() {
   const [item, setItem] = useState({});
@@ -37,26 +41,70 @@ export default function MovieItemPage() {
     fetchMovieItem();
   }, [params.id]);
 
+  const date = item.release_date;
+
   return (
     <>
-      <button onClick={goBack}>Go back</button>
-      <div>
-        <img
-          src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-          alt=""
-        />
-        <h2>{item.original_title || item.name}</h2>
-        <div>Overview:{item.overview}</div>
-        <div>{item.genres && item.genres.map(gen => gen.name)}</div>
+      <button onClick={goBack} className={styles.button}>
+        Go back
+      </button>
+      <div className={styles.movieBox}>
+        {item.poster_path ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w500${item.poster_path}` || photo}
+            alt={item.original_title || item.name}
+            width={400}
+            className={styles.poster}
+          />
+        ) : (
+          <img
+            src={photo}
+            alt={item.original_title || item.name}
+            width={400}
+            className={styles.poster}
+          />
+        )}
+        <div>
+          <h2 className={styles.title}>
+            {item.original_title || item.name}
+            {date ? `(${date.slice(0, 4)})` : ''}
+          </h2>
+          <p>
+            User Score:{' '}
+            {item.vote_average ? (item.vote_average * 10).toFixed(0) : ''}%
+          </p>
+          <h3 className={styles.discription}>Overview</h3>
+          <p className={styles.text}>{item.overview}</p>
+          <h3 className={styles.discription}>Genres</h3>
+          <p className={styles.text}>
+            {item.genres &&
+              item.genres.map(gen => (
+                <span key={nanoid()} className={styles.gen}>
+                  {gen.name}
+                </span>
+              ))}
+          </p>
+        </div>
       </div>
-      {loading && <p>Loading ....</p>}
+      {loading && <Audio />}
       {error && <p>Fail ....{error.message}</p>}
-      <Link state={{ from }} to={`/movies/${item.id}/cast`}>
-        Cast
-      </Link>
-      <Link state={{ from }} to={`/movies/${item.id}/reviews`}>
-        Reviews
-      </Link>
+      <p className={styles.info}>Additional information</p>
+      <div className={styles.boxBtn}>
+        <Link
+          state={{ from }}
+          to={`/movies/${item.id}/cast`}
+          className={styles.button}
+        >
+          Cast
+        </Link>
+        <Link
+          state={{ from }}
+          to={`/movies/${item.id}/reviews`}
+          className={styles.button}
+        >
+          Reviews
+        </Link>
+      </div>
       <Outlet />
     </>
   );

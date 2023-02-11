@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ListItems from '../ListItems/ListItems';
 import { getSearchMovies } from '../shared/api/movies';
+import styles from './MoviesSearch.module.scss';
+import { Audio } from 'react-loader-spinner';
 
 export default function MoviesSearch() {
   const [items, setItems] = useState([]);
@@ -42,15 +44,21 @@ export default function MoviesSearch() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Search
-          <input name="search" value={search} onChange={handleChange}></input>
-        </label>
-        <button type="submit">search</button>
-      </form>
+      <div className={styles.Searchbar}>
+        <form onSubmit={handleSubmit} className={styles.SearchForm}>
+          <input
+            name="search"
+            value={search}
+            onChange={handleChange}
+            className={styles.SearchFormInput}
+          ></input>
+          <button type="submit" className={styles.SearchFormButton}>
+            .../
+          </button>
+        </form>
+      </div>
       <ListItems items={items} />
-      {loading && <p>Loading ....</p>}
+      {loading && <Audio />}
       {error && <p>Fail ....{error.message}</p>}
     </>
   );

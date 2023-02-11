@@ -1,13 +1,18 @@
 import { NavLink } from 'react-router-dom';
+import styles from './Menu.module.scss';
 
 export default function Menu() {
   return (
-    <ul>
+    <ul className={styles.listItem}>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/" className={styles.button}>
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/movies">Movies</NavLink>
+        <NavLink to="/movies" className={styles.button}>
+          Movies
+        </NavLink>
       </li>
     </ul>
   );

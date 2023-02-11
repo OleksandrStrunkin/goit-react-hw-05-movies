@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getCast } from 'components/modules/shared/api/movies';
+import styles from './CastPage.module.scss';
+import photo from '../NoFoundPage/notFound.jpg';
+import { Audio } from 'react-loader-spinner';
 
 export default function CastPage() {
   const [items, setItems] = useState([]);
@@ -23,21 +26,31 @@ export default function CastPage() {
     fetchCast();
   }, [params.id, setError, setItems, setLoading]);
 
-  const elements = items.map(item => (
-    <li key={item.id}>
-      <img
-        src={`https://image.tmdb.org/t/p/w500${item.profile_path}`}
-        alt=""
-        width={100}
-      />
-      <p>{item.original_name}</p>
-      <p>Character:{item.character}</p>
-    </li>
-  ));
+  const elements = items.map(item => {
+    return (
+      <li key={item.id} className={styles.listItem}>
+        {item.profile_path ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w500${item.profile_path}` || photo}
+            alt={item.original_name}
+            width={200}
+          />
+        ) : (
+          <img src={photo} alt={item.original_name} width={200} />
+        )}
+        <p className={styles.name}>{item.original_name}</p>
+        <p className={styles.text}>
+          <span>Character:</span>
+          {item.character}
+        </p>
+      </li>
+    );
+  });
+
   return (
     <>
-      <ol>{elements}</ol>
-      {loading && <p>Loading ....</p>}
+      <ul className={styles.castList}>{elements}</ul>
+      {loading && <Audio />}
       {error && <p>Fail ....{error.message}</p>}
     </>
   );

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getReviews } from 'components/modules/shared/api/movies';
+import styles from './ReviewsPage.module.scss';
+import { Audio } from 'react-loader-spinner';
 
 export default function ReviewsPage() {
   const [items, setItems] = useState([]);
@@ -24,15 +26,22 @@ export default function ReviewsPage() {
   }, [params.id, setError, setItems, setLoading]);
 
   const elements = items.map(item => (
-    <li key={item.id}>
-      <h2>Author:{item.author}</h2>
+    <li key={item.id} className={styles.item}>
+      <h2>
+        <span>Author:</span>
+        {item.author}
+      </h2>
       <p>{item.content}</p>
     </li>
   ));
   return (
     <>
-      <ol>{elements || <p>No found review</p>}</ol>
-      {loading && <p>Loading ....</p>}
+      {items.length > 0 ? (
+        <ul className={styles.listItems}>{elements}</ul>
+      ) : (
+        <p>No found review</p>
+      )}
+      {loading && <Audio />}
       {error && <p>Fail ....{error.message}</p>}
     </>
   );

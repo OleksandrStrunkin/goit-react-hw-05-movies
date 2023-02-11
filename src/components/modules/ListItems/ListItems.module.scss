@@ -1,0 +1,52 @@
+.list{
+    padding: 20px 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.ListItem{
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+max-width: 200px;
+}
+
+.ListItem:hover{
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+}
+
+.ListItem img{
+border-radius: 50px;
+display: block;
+max-width: 200px;
+width: 100%;
+height: auto;
+box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
+.name{
+    margin: 0;
+    padding: 10px 0;
+    font-family: 'Poppins';
+    font-weight: 400;
+    color: #497174;
+
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+
+  line-height: 16px;
+  min-height: 40px;
+}
+.link{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    font-style: normal;
+    text-decoration: none;
+}

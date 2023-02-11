@@ -1,0 +1,42 @@
+.castList{
+    padding: 0;
+   list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center
+};
+
+.listItem{
+    border-radius: 10px;
+    width: 200px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+};
+
+.text{
+    margin: 0;
+    padding: 0 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    font-family: 'Poppins';
+    font-weight: 400;
+    color: #497174;
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+}
+.text span{
+    margin-right: 10px;
+    font-weight: 600;
+}
+.name{
+    margin: 0;
+    padding: 20px 20px;
+    text-align: center;
+    font-family: 'Poppins';
+    font-weight: 800;
+    color: #497174;
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+}

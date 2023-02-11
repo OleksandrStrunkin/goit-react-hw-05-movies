@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ListItems from '../ListItems/ListItems';
 import { getMoviesList } from '../shared/api/movies';
+import { Audio } from 'react-loader-spinner';
 
 export default function MoviesList() {
   const [items, setItems] = useState([]);
@@ -25,7 +26,7 @@ export default function MoviesList() {
   return (
     <>
       <ListItems items={items} />
-      {loading && <p>Loading ....</p>}
+      {loading && <Audio />}
       {error && <p>Fail ....{error.message}</p>}
     </>
   );
