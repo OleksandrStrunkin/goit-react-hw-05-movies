@@ -7,7 +7,7 @@ import {
   useNavigate,
   useLocation,
 } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import styles from './MovieItemPage.module.scss';
 import photo from '../NoFoundPage/notFound.jpg';
 import { Audio } from 'react-loader-spinner';
@@ -89,23 +89,25 @@ export default function MovieItemPage() {
       {loading && <Audio />}
       {error && <p>Fail ....{error.message}</p>}
       <p className={styles.info}>Additional information</p>
-      <div className={styles.boxBtn}>
-        <Link
-          state={{ from }}
-          to={`/movies/${item.id}/cast`}
-          className={styles.button}
-        >
-          Cast
-        </Link>
-        <Link
-          state={{ from }}
-          to={`/movies/${item.id}/reviews`}
-          className={styles.button}
-        >
-          Reviews
-        </Link>
-      </div>
-      <Outlet />
+      <Suspense>
+        <div className={styles.boxBtn}>
+          <Link
+            state={{ from }}
+            to={`/movies/${item.id}/cast`}
+            className={styles.button}
+          >
+            Cast
+          </Link>
+          <Link
+            state={{ from }}
+            to={`/movies/${item.id}/reviews`}
+            className={styles.button}
+          >
+            Reviews
+          </Link>
+        </div>
+        <Outlet />
+      </Suspense>
     </>
   );
 }

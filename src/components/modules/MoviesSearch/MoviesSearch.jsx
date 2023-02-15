@@ -19,7 +19,6 @@ export default function MoviesSearch() {
       setLoading(true);
       try {
         const result = await getSearchMovies(value);
-        console.log(result);
         setItems(result.results);
       } catch (error) {
         setError(error);
@@ -29,6 +28,7 @@ export default function MoviesSearch() {
     };
     if (value) {
       fetchSearchMovies();
+      setSearch(value);
     }
   }, [setError, setItems, setLoading, value]);
 
@@ -39,7 +39,6 @@ export default function MoviesSearch() {
   const handleSubmit = e => {
     e.preventDefault();
     setValueParams({ query: search });
-    setSearch('');
   };
 
   return (
@@ -53,7 +52,7 @@ export default function MoviesSearch() {
             className={styles.SearchFormInput}
           ></input>
           <button type="submit" className={styles.SearchFormButton}>
-            .../
+            ../
           </button>
         </form>
       </div>

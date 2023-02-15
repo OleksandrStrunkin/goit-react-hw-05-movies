@@ -8,10 +8,34 @@
 };
 
 .listItem{
-    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     width: 200px;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    box-sizing: border-box;
+  background: rgba(217, 217, 217, 0.58);
+  border: 1px solid white;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  user-select: none;
+  font-weight: bolder;
 };
+.listItem:hover {
+  border: 1px solid #EB6440;
+  transform: scale(1.05);
+}
+
+.listItem:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+.listItem img{
+    max-width: 200px;
+    border-radius: 18px;
+}
 
 .text{
     margin: 0;

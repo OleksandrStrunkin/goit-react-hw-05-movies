@@ -10,7 +10,7 @@ const ReviewsPage = lazy(() => import('./ReviewsPage/ReviewsPage'));
 
 export default function UserRoutes() {
   return (
-    <Suspense>
+    <Suspense fallback={<p>...Loading</p>}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/movies" element={<MoviesPage />} />
